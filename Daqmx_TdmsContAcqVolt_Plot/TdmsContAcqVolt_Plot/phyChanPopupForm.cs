@@ -26,27 +26,31 @@ namespace PhyChanPopup
         {
             const string chanSearchKey = "/ai";
             bool first = true;
-            int i = 1;
-            string thisItem, tempItem = "", lastItem = "";
+            int thisSearchIndex, lastSearchIndex;
+            string thisItem, tempItem, lastItem, lastSyntax; 
+            tempItem = lastItem = lastSyntax = "";
             foreach (var item in phyChanListBox.SelectedItems)
             {
                 thisItem = item.ToString();
                 if (first == true)
                 {
-                    phyChanSyntax = thisItem;
-                    lastItem = thisItem;
+                    phyChanSyntax = lastItem = lastSyntax = thisItem;
                     first = false;
                 }
                 else
                 {
-                    // If the current device is same as previous one, concatenate the channels
-                    if (thisItem.Substring(0, thisItem.IndexOf(chanSearchKey)) == lastItem.Substring(0, lastItem.IndexOf(chanSearchKey)))
+                    // If the current device is same as previous one, and the channel number follows, concatenate the channels
+                    thisSearchIndex = thisItem.IndexOf(chanSearchKey);
+                    lastSearchIndex = lastItem.IndexOf(chanSearchKey);
+                    if (
+                        thisItem.Substring(0, thisSearchIndex) == lastItem.Substring(0, lastSearchIndex) 
+                        && int.Parse(thisItem.Substring(thisSearchIndex+3)) == int.Parse(lastItem.Substring(lastSearchIndex+3))+1
+                        )
                     {
-                        tempItem = lastItem;
-                        phyChanSyntax = phyChanSyntax.Substring(0, phyChanSyntax.Length - lastItem.Length - 2);
-                        if (tempItem.Contains(":"))
+                        phyChanSyntax = phyChanSyntax.Substring(0, phyChanSyntax.IndexOf(lastSyntax));
+                        if (lastSyntax.Contains(":"))
                         {
-                            tempItem = tempItem.Substring(0, tempItem.IndexOf(":") + 1)
+                            tempItem = lastSyntax.Substring(0, lastSyntax.IndexOf(":") + 1)
                                 + thisItem.Substring(thisItem.IndexOf(chanSearchKey) + 3);
                         }
                         else
@@ -56,13 +60,13 @@ namespace PhyChanPopup
                         phyChanSyntax += tempItem;
                     }
                     else
-                        phyChanSyntax += thisItem;
-                    lastItem = tempItem;
+                    {
+                        tempItem = thisItem;
+                        phyChanSyntax += ", " + tempItem;
+                    }                  
+                    lastSyntax = tempItem;
+                    lastItem = thisItem;
                 }
-
-                if (i != phyChanListBox.SelectedItems.Count)
-                    phyChanSyntax += ", ";
-                i++;
             }
             Close();
         }

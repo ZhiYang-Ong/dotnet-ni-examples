@@ -167,7 +167,6 @@ namespace NationalInstruments.Examples.TdmsContAcqVolt_Plot
         private Label timeStartNote;
         private CheckBox manualTimeCheckBox;
         private DateTimePicker timeStartPicker;
-        private ContextMenuStrip contextMenuStrip1;
         private System.ComponentModel.IContainer components;
 
         public MainForm()
@@ -254,7 +253,6 @@ namespace NationalInstruments.Examples.TdmsContAcqVolt_Plot
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.channelParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.browseChanButton = new System.Windows.Forms.Button();
@@ -323,7 +321,6 @@ namespace NationalInstruments.Examples.TdmsContAcqVolt_Plot
             this.manualTimeCheckBox = new System.Windows.Forms.CheckBox();
             this.timeStartPicker = new System.Windows.Forms.DateTimePicker();
             this.trigParametersGroupBox = new System.Windows.Forms.GroupBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.channelParametersGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimumValueNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximumValueNumeric)).BeginInit();
@@ -1086,12 +1083,6 @@ namespace NationalInstruments.Examples.TdmsContAcqVolt_Plot
             this.trigParametersGroupBox.TabIndex = 7;
             this.trigParametersGroupBox.TabStop = false;
             this.trigParametersGroupBox.Text = "Trigger Parameters";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // MainForm
             // 
